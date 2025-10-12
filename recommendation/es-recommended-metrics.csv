@@ -1,0 +1,10 @@
+﻿Threshold,Statistic,Metric,,
+80,Maximum,CPUUtilization,ClusterStatus.yellow,ClusterStatus.red
+1,,ClusterStatus.red,,
+20480,Minimum,FreeStorageSpace,,
+1,,ClusterIndexWritesBlocked,,
+1,,AutomatedSnapshotFailure,,
+95,Maximum,JVMMemoryPressure,,
+50,Maximum,MasterCPUUtilization,,
+95,Maximum,MasterJVMMemoryPressure,,
+1,Sum,ThreadpoolSearchRejected,,
