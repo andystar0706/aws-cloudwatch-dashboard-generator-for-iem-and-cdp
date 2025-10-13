@@ -14,7 +14,7 @@ class DashboardGenerator:
                                  region_name=config['region'],
                                  aws_access_key_id=config['aws_access_key_id'],
                                  aws_secret_access_key=config['aws_secret_access_key'])
-        self.period = 60 # period
+        self.period = 60
         
         # Dashboard layout settings
         self.x = 0

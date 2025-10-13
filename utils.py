@@ -83,6 +83,13 @@ def get_logger(name):
     logger = logging.getLogger(name)
     return logger
 
+def load_json_config(file_path: str) -> list:
+    """Load JSON configuration file"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except:
+        return []
     
 if __name__ == '__main__':
     print(is_valid_statistic('AVG'))

@@ -1,6 +1,7 @@
 # cli.py
 import argparse
 import os
+from utils import load_json_config
 
 def create_parser():
     """创建命令行参数解析器"""
@@ -16,16 +17,16 @@ Usage Examples:
   export AWS_SECRET_ACCESS_KEY=<your-secret-key>
   
   # Basic usage - Kafka cluster
-  python generator.py --region us-east-1 --name cluster-01 --namespace AWS/Kafka
+  python3 dashboard-generator.py --region us-east-1 --name cluster-01 --namespace AWS/Kafka
   
   # ElasticSearch with custom output
-  python generator.py --region us-east-1 --name cluster-01 --namespace AWS/ES --dashboard-name my-es-dashboard --output dashboard.json
+  python3 dashboard-generator.py --region us-east-1 --name cluster-01 --namespace AWS/ES --dashboard-name my-es-dashboard --output dashboard.json
   
   # Generate JSON only (no upload to CloudWatch)
-  python generator.py --region us-east-1 --name cluster-01 --namespace AWS/Kafka --no-upload
+  python3 dashboard-generator.py --region us-east-1 --name cluster-01 --namespace AWS/Kafka --no-upload
 
   # Custom CSV file path
-  python generator.py --region us-east-1 --name cluster-01 --namespace AWS/ES --csv /path/to/my-custom-metrics.csv
+  python3 dashboard-generator.py --region us-east-1 --name cluster-01 --namespace AWS/ES --csv /path/to/my-custom-metrics.csv
         '''
     )
     parser._optionals.title = 'Optional arguments'
@@ -43,6 +44,7 @@ Usage Examples:
     parser.add_argument('--output', type=str, default='dashboard.json', help='Output file path (default: dashboard.json)')
     parser.add_argument('--dashboard-name', type=str, default=None, help='Custom Dashboard name (default: auto-generated)')
     parser.add_argument('--no-upload', action='store_true', help='Do not upload to CloudWatch')
+    parser.add_argument('--list', action=ListAction, help='List all supported namespaces and regions')
     
     return parser
 
@@ -50,3 +52,44 @@ def parse_args():
     """解析并返回命令行参数"""
     parser = create_parser()
     return parser.parse_args()
+
+def display_all_supported_resources():
+    print("=" * 80)
+    print("CloudWatch Dashboard Generator - Supported Resources")
+    print("=" * 80)
+    print()
+
+    # Display Regions
+    regions_data = load_json_config('./definitions/regions.json')
+    print("SUPPORTED REGIONS:")
+    print()
+    print(regions_data)
+    print()
+
+    # Display Namespaces
+    namespaces_data = load_json_config('./definitions/namespaces.json')
+    print("SUPPORTED NAMESPACES:")
+    print()
+    print(namespaces_data)
+    
+    print("=" * 80)
+    print("\nUsage Example:")
+    print("  python3 dashboard-generator.py --region us-east-1 --name cluster-01 --namespace AWS/Kafka")
+    print("\nFor more help:")
+    print("  python3 dashboard-generator.py --help")
+    print()
+
+class ListAction(argparse.Action):
+    """Custom action for --list that exits immediately like --help"""
+    def __init__(self, option_strings, dest, **kwargs):
+        super(ListAction, self).__init__(
+            option_strings, 
+            dest, 
+            nargs=0,
+            default=argparse.SUPPRESS,
+            **kwargs
+        )
+    
+    def __call__(self, parser, namespace, values, option_string=None):
+        display_all_supported_resources()
+        parser.exit(0)  # 退出码 0 表示成功
