@@ -142,7 +142,7 @@ class DashboardGenerator:
 
 def main():
 
-    # 解析命令行参数
+    # 解析命令行參數
     args = parse_args()
     
     # Configuration

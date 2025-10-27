@@ -4,13 +4,13 @@ import os
 from utils import load_json_config
 
 def create_parser():
-    """创建命令行参数解析器"""
+    """創建命令行參數解析器"""
     parser = argparse.ArgumentParser(
-        prog='generator',
+        prog='python3 dashboard-generator.py',  # ← 修改這裡
         description='CloudWatch Dashboard Generator - Generate CloudWatch Dashboard from CSV',
         formatter_class=argparse.RawDescriptionHelpFormatter,
+        add_help=False,
         epilog='''
-
 Usage Examples:
   # Set environment variables (recommended)
   export AWS_ACCESS_KEY_ID=<your-access-key>
@@ -29,27 +29,27 @@ Usage Examples:
   python3 dashboard-generator.py --region us-east-1 --name cluster-01 --namespace AWS/ES --csv /path/to/my-custom-metrics.csv
         '''
     )
-    parser._optionals.title = 'Optional arguments'
+    
+    required = parser.add_argument_group('Required arguments')
+    required.add_argument('--region', type=str, required=True, help='AWS region (e.g., us-east-1, ap-east-1)')
+    required.add_argument('--name', type=str, required=True, help='Resource name (e.g., cluster-01)')
+    required.add_argument('--namespace', type=str, required=True, help='CloudWatch namespace (e.g., AWS/Kafka, AWS/EC2)')
 
-    parser.add_argument('--region', type=str, required=True, help='AWS region (e.g., us-east-1, ap-east-1)')
-    parser.add_argument('--name', type=str, required=True, help='Resource name (e.g., cluster-01)')
-    parser.add_argument('--namespace', type=str, required=True, help='CloudWatch namespace (e.g., AWS/Kafka, AWS/EC2)')
-
-    #parser.add_argument('--aws-access-key-id', type=str, required=True, help='AWS Access Key ID')
-    #parser.add_argument('--aws-secret-access-key', type=str, required=True, help='AWS Secret Access Key')
-    A = ''
-    parser.add_argument('--aws-access-key-id', type=str, default=os.environ.get('AWS_ACCESS_KEY_ID'), help='AWS Access Key ID (default: read from environment variable AWS_ACCESS_KEY_ID)')
-    parser.add_argument('--aws-secret-access-key', type=str, default=os.environ.get('AWS_SECRET_ACCESS_KEY'), help='AWS Secret Access Key (default: read from environment variable AWS_SECRET_ACCESS_KEY)')
-    parser.add_argument('--csv', type=str, default=None, help='CSV file path')
-    parser.add_argument('--output', type=str, default='dashboard.json', help='Output file path (default: dashboard.json)')
-    parser.add_argument('--dashboard-name', type=str, default=None, help='Custom Dashboard name (default: auto-generated)')
-    parser.add_argument('--no-upload', action='store_true', help='Do not upload to CloudWatch')
-    parser.add_argument('--list', action=ListAction, help='List all supported namespaces and regions')
+    optional = parser.add_argument_group('Optional arguments')
+    optional.add_argument('-h', '--help', action='help', help='show this help message and exit')  # ← 手動添加 help
+    optional.add_argument('--aws-access-key-id', type=str, default=os.environ.get('AWS_ACCESS_KEY_ID'), help='AWS Access Key ID (default: read from environment variable AWS_ACCESS_KEY_ID)')
+    optional.add_argument('--aws-secret-access-key', type=str, default=os.environ.get('AWS_SECRET_ACCESS_KEY'), help='AWS Secret Access Key (default: read from environment variable AWS_SECRET_ACCESS_KEY)')
+    optional.add_argument('--csv', type=str, default=None, help='CSV file path')
+    optional.add_argument('--output', type=str, default='dashboard.json', help='Output file path (default: dashboard.json)')
+    optional.add_argument('--dashboard-name', type=str, default=None, help='Custom Dashboard name (default: <Service>_<Region>_<Name>_<Timestamp>)')
+    optional.add_argument('--no-upload', action='store_true', help='Do not upload to CloudWatch')
+    optional.add_argument('--list', action=ListAction, help='List all supported namespaces and regions')
     
     return parser
 
+
 def parse_args():
-    """解析并返回命令行参数"""
+    """解析並返回命令行參數"""
     parser = create_parser()
     return parser.parse_args()
 
@@ -92,4 +92,4 @@ class ListAction(argparse.Action):
     
     def __call__(self, parser, namespace, values, option_string=None):
         display_all_supported_resources()
-        parser.exit(0)  # 退出码 0 表示成功
+        parser.exit(0)  # 退出碼 0 表示成功
