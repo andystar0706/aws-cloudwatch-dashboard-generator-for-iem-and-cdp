@@ -1,3 +1,5 @@
-﻿Threshold,Statistic,Metric1,Metric2,Metric
-80,"Average | Sum | Maximum | Minimum | SampleCount | p99 (Choose 1, default = Average)",CPUUtilization,,
-,,ClusterStatus.red,ClusterStatus.yellow,ClusterStatus.green
+﻿Threshold,Statistic,Metric,,
+{number},"{Average,Sum,Maximum,Minimum,SampleCount,p99}",Metric 1,{Metric 2},{Metric n}
+80,Maximum,CPUUtilization,WarmCPUUtilization,
+0,,ClusterStatus.green,,
+,,Nodes,,
