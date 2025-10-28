@@ -105,3 +105,21 @@ STEP 8. You may see the dashobard that we just created, and Open it.
 ## Demo
 
 ![Demo](https://github.com/andystar0706/aws-cloudwatch-dashboard-generator-for-iem-and-cdp/blob/main/cw-dashboard-sample.png)
+
+## How to customized the dashboard ?
+
+1. Copy the template CSV from the recommendation folder: aws-cloudwatch-dashboard-generator-for-iem-and-cdp/recommendation/template-recommended-metrics.csv
+2. The template contains the following table structure:
+
+|Threshold|Statistic|Metric|||
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| {number} | {Average,Sum,Maximum,Minimum,SampleCount,p99} | Metric 1 | {Metric 2}| {Metric n}|
+| 80  | Maximum  | CPUUtilization|WarmCPUUtilization||
+| 0  || ClusterStatus.green|||
+|||Nodes||
+
+The only required column is **Metric 1**, and other columns with `{}` are optional.
+
+**Adding Metrics:**
+- To create a **stacked chart**, add metrics in the same row. For example, CPUUtilization and WarmCPUUtilization
+- To add a **separate chart**, add a new row. For example, CPUUtilization, ClusterStatus.green and Nodes.
