@@ -1,5 +1,13 @@
 # aws-cloudwatch-dashboard-generator-for-iem-and-cdp
 
+### Overview
+
+This tool is designed to support customer can easily to montior the resource during IEM and CDP event. The metric has been reviewed by our experts and the user can also customized it by themselves.
+
+![alt text](https://github.com/andystar0706/aws-cloudwatch-dashboard-generator-for-iem-and-cdp/blob/main/cw-dashboard-sample.png)
+
+### How to install and run the tool ?
+
 STEP 1. Create one IAM User/Role with the following IAM Permission.
 ```
 {
