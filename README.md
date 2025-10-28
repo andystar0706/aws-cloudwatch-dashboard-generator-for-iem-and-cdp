@@ -94,3 +94,6 @@ $ python3 dashboard-generator.py --region us-east-1 --name aos-cluster --namespa
 Dashboard Saved Successfully: dashboard.json
 Dashboard Created Successfully: ES_us-east-1_aos-cluster_1760332258
 ```
+
+STEP 7. Go to AWS Console, and CloudWatch and then click Dashboards button which shows on the top left side.  
+STEP 8. You may see the dashobard that we just created, and Open it.
