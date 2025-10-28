@@ -71,11 +71,14 @@ SUPPORTED NAMESPACES:
 ['AWS/AmplifyHosting', 'AWS/ApiGateway', 'AWS/AppStream', 'AWS/AppSync'...]
 ```
 
-STEP 5. Setup credentials.
+STEP 5. Setup credentials
 ```
 $ export AWS_ACCESS_KEY_ID=<your-access-key>
 $ export AWS_SECRET_ACCESS_KEY=<your-secret-key>
 ```
+
+⚠️ If you don't have AWS access key, please check "How do I create an AWS access key" blog below?
+https://repost.aws/knowledge-center/create-access-key
 
 STEP 6. Generate dashboard.json to create cloudwatch dashboard.
 ```
