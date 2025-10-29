@@ -35,7 +35,7 @@ $ pip3 install -r requirements.txt
 
 STEP 4. Run --help and --list.
 ```
-python3 dashboard-generator.py --help
+$ python3 dashboard-generator.py --help
 
 usage: python3 dashboard-generator.py --region REGION --name NAME --namespace NAMESPACE [-h] [--aws-access-key-id AWS_ACCESS_KEY_ID] [--aws-secret-access-key AWS_SECRET_ACCESS_KEY] [--csv CSV] [--output OUTPUT]
                                       [--dashboard-name DASHBOARD_NAME] [--no-upload] [--list]
