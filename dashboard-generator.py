@@ -22,7 +22,7 @@ class DashboardGenerator:
         self.width = 12
         self.height = 6
         self.dashboard = {"widgets": []}
-        self.dashboard_name = config['namespace'].replace('AWS/','')+'_'+config['region']+'_'+config['resource_name']+'_'+get_current_timestamp()
+        self.dashboard_name = config['namespace'].replace('AWS/','')+'_'+config['region']+'_'+config['resource_name'].replace('/','')+'_'+get_current_timestamp()
         
         # Logger settings
         self.logger = get_logger(self.dashboard_name)
@@ -36,14 +36,16 @@ class DashboardGenerator:
         )
 
         for metric in metric_list['Metrics']:
-            if metric['Dimensions'][0]['Value'] == self.resource_name:
-                tmp = [
-                    metric['Namespace'],
-                    metric['MetricName']
-                ]
-                for dimension in metric['Dimensions']:
-                    tmp.extend([dimension['Name'], dimension['Value']])
-                metrics.append(tmp)
+            for i in range (len(metric['Dimensions'])):
+                if metric['Dimensions'][i]['Value'] == self.resource_name: ## 每個 Resource Name 處於不同維度
+                    tmp = [
+                        metric['Namespace'],
+                        metric['MetricName']
+                    ]
+                    for dimension in metric['Dimensions']:
+                        tmp.extend([dimension['Name'], dimension['Value']])
+                    metrics.append(tmp)
+                    break
 
         return metrics
 
