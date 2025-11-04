@@ -1,0 +1,14 @@
+Threshold,Statistic,Metric,
+85,Maximum,CPUUtilization,
+800,Maximum,DatabaseConnections,
+1,Maximum,HealthStatus,
+0,,MaintenanceMode,
+85,Maximum,PercentageDiskSpaceUsed,
+900,Maximum,ReadIOPS,
+900,Maximum,WriteIOPS,
+10,Maximum,ReadLatency,
+10,Maximum,WriteLatency,
+,,"WLMQueriesCompletedPerSecond	",QueriesCompletedPerSecond
+600,Maximum,WLMQueryDuration,QueryDuration
+,,WLMQueueLength,
+,,CommitQueueLength,
