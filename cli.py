@@ -6,7 +6,7 @@ from utils import load_json_config
 def create_parser():
     """創建命令行參數解析器"""
     parser = argparse.ArgumentParser(
-        prog='python3 dashboard-generator.py',  # ← 修改這裡
+        prog='python3 dashboard-generator.py',
         description='CloudWatch Dashboard Generator - Generate CloudWatch Dashboard from CSV',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         add_help=False,
@@ -36,7 +36,7 @@ Usage Examples:
     required.add_argument('--namespace', type=str, required=True, help='CloudWatch namespace (e.g., AWS/Kafka, AWS/EC2)')
 
     optional = parser.add_argument_group('Optional arguments')
-    optional.add_argument('-h', '--help', action='help', help='show this help message and exit')  # ← 手動添加 help
+    optional.add_argument('-h', '--help', action='help', help='show this help message and exit')
     optional.add_argument('--aws-access-key-id', type=str, default=os.environ.get('AWS_ACCESS_KEY_ID'), help='AWS Access Key ID (default: read from environment variable AWS_ACCESS_KEY_ID)')
     optional.add_argument('--aws-secret-access-key', type=str, default=os.environ.get('AWS_SECRET_ACCESS_KEY'), help='AWS Secret Access Key (default: read from environment variable AWS_SECRET_ACCESS_KEY)')
     optional.add_argument('--csv', type=str, default=None, help='CSV file path')
