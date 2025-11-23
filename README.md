@@ -1,6 +1,6 @@
 # aws-cloudwatch-dashboard-generator-for-iem-and-cdp
 
-This tool enables customers to easily monitor resource usage during IEM and CDP events. All metrics have been carefully reviewed and validated by our experts. Additionally, users can customize the metrics to fit their specific requirements.
+This tool enables users to easily monitor resource usage during IEM and CDP events. All metrics have been carefully reviewed and validated by our experts. Additionally, users can customize the metrics to fit their specific requirements.
 
 ## How to install and run the tool ?
 
